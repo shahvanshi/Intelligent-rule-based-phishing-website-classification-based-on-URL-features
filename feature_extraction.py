@@ -7,6 +7,7 @@ from datetime import datetime, date
 
 import requests
 import whois
+from whois.exceptions import UnknownTld, FailedParsingWhoisOutput, UnknownDateFormat, WhoisCommandFailed
 from bs4 import BeautifulSoup
 from dateutil.parser import parse as date_parse
 from googlesearch import search
@@ -41,9 +42,20 @@ def generate_data_set(url):
     # Requests all the information about the domain
     # whois_response = whois.whois(domain)
     print(domain)
-    print(whois.query(domain))
-    whois_response = whois.query(domain) # aama prb aai che whois nu replacement nathi ? joi laie
-    print(type(whois_response))
+    # print(whois.query(domain))
+    try:
+        whois_response = whois.query(domain) 
+    except UnknownTld as e:
+        print("UnknownTld")
+    except FailedParsingWhoisOutput as e:
+        print("FailedParsingWhoisOutput")
+    except UnknownDateFormat as e:
+        print("UnknownDateFormat")
+    except WhoisCommandFailed as e:
+        print("WhoisCommandFailed")
+    except:
+        print("Unknown exception")
+    print(whois_response)
 
 
     rank_checker_response = requests.post("https://www.checkpagerank.net/index.php", {
@@ -120,20 +132,21 @@ def generate_data_set(url):
         data_set.append(-1)
 
     # 9.Domain_registeration_length
-    expiration_date = whois_response.expiration_date
-    registration_length = 0
-    try:
-        expiration_date = min(expiration_date)
-        today = time.strftime('%Y-%m-%d')
-        today = datetime.strptime(today, '%Y-%m-%d')
-        registration_length = abs((expiration_date - today).days)
+    if whois_response:
+        expiration_date = whois_response.expiration_date
+        registration_length = 0
+        try:
+            expiration_date = min(expiration_date)
+            today = time.strftime('%Y-%m-%d')
+            today = datetime.strptime(today, '%Y-%m-%d')
+            registration_length = abs((expiration_date - today).days)
 
-        if registration_length / 365 <= 1:
+            if registration_length / 365 <= 1:
+                data_set.append(-1)
+            else:
+                data_set.append(1)
+        except:
             data_set.append(-1)
-        else:
-            data_set.append(1)
-    except:
-        data_set.append(-1)
 
     # 10.Favicon
     if soup == -999:

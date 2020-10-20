@@ -41,3 +41,4 @@ urllib3==1.25.10
 Werkzeug==1.0.1
 whois==0.9.7
 xlrd==1.2.0
+lxml==4.6.1

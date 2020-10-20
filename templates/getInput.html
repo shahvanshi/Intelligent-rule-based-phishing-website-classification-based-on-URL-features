@@ -39,12 +39,44 @@
 .loading-dots--dot:nth-child(3) {
   animation-delay: 1s;
 }
+.test-header{
+  width: 70%;
+  margin-top: 50px;
+  margin-left: 50px;
 
+}
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #2f5886;
+    border-color: #4687ce;
+}
+.btn-group-lg>.btn, .btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0 3px 1rem 0;
+}
+.form-control{
+  color: #fafafb;
+  background-color: #fff0;
+  background-clip: padding-box;
+  border: 1px solid #a5a5ad;
+}
+.form-control:focus {
+  color: #fafafb !important;
+  background-color: #fff0 !important;
+}
+h1{
+  /* text-align: center; */
+}
+body{
+  height: 100vh;
+}
     </style>
   </head>
-  <body style="background-image: url('https://www.it.ucla.edu/sites/g/files/yaccgq956/f/february-security-article-image-phishing-blank992x500.jpg');">
-
-    <center style="margin-top: 90px;">
+  <body style="background-image: url('https://testphisingproject.s3.amazonaws.com/7ad0c9b192167fbeac6f53ff97a656df.gif'); background-repeat: no-repeat; background-size: 100% 100%;">
+    
+    <div  class="test-header">
      <h1 class="text-white">Phishing Url Detection</h1>
       <div class="single-url">
       <div class="input-group input-group-lg" style="width: 800px;margin-top: 50px">
@@ -52,7 +84,7 @@
           <span class="input-group-text" id="inputGroup-sizing-lg">Enter a URL:</span>
         </div>
         <input type="text" class="form-control" id="url"   value="">
-          <button type="submit" class="btn getResult btn-primary btn-lg mb-2" style="margin-left: 10px">Submit</button>
+          <button type="submit" class="btn getResult btn-primary btn-lg mb-2" style="margin-left: -1%">Submit</button>
              <div>
       <span class="text-white">If you want see the result of multiple URL's. You can upload a file containing URL's </span><span><button type="button" class="btn text-white btn-primary multi">Upload File</button></span>
     </div>
@@ -71,7 +103,7 @@
   </div>
       <div class="result"></div>
 
-    </center>
+</div>
 
 
 
